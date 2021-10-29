@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reven/global/theme/index.dart';
+import 'package:reven/global/packages/config_package.dart';
 import 'package:reven/screens/intro_screen/intro_style.dart';
 import 'package:reven/screens/login_screen/login_style.dart';
 
@@ -10,14 +10,14 @@ class IntroFields {
       {double? letterSpacing, double? fontSize, FontWeight? fontWeight}) {
     return Text(
       title!,
-      style: LoginStyle()
+      style: IntroStyle()
           .titleTextStyle(color, fontWeight, letterSpacing, fontSize),
     );
   }
 
   //sizedbox height
   final heightSpacing = (double data) => SizedBox(
-        height: data,
+        height: appScreenUtil.size(data),
       );
 
   final text = (data, style) => Text(
@@ -25,6 +25,7 @@ class IntroFields {
         style: style,
       );
 
+  //get button
   final inkWell = ({GestureTapCallback? onTap,text,style}) => InkWell(
         onTap: onTap,
         child: IntroFields().text(text, style),

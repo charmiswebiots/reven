@@ -33,7 +33,7 @@ class LoginStyle {
 
 // Button Text Style
   final btnTextstyle =
-      TextStyle(color: Colors.white, letterSpacing: 0.5, fontSize: 16);
+      TextStyle(color: Colors.white, letterSpacing: 0.5, fontSize: appScreenUtil.fontSize(16));
 
   final edgeInsets = EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0);
 
@@ -43,7 +43,7 @@ class LoginStyle {
 
   //not register Style
   final notRegisterStyle =
-      TextStyle(color: appColor.primaryDarkColor, fontSize: 18);
+      TextStyle(color: appColor.primaryDarkColor, fontSize: appScreenUtil.fontSize(14));
 
   titleTextStyle(color, fontWeight, letterSpacing, fontSize) {
     return TextStyle(

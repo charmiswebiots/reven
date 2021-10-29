@@ -6,5 +6,6 @@ class RouteName {
   final String verifyByEmailOrMobile = '/verifyByEmailOrMobile';
   final String otpScreen = '/otpScreen';
   final String intro = '/intro';
+  final String confirmPassword = '/confirmPassword';
   final noInternet = '/noInternet';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reven/global/theme/index.dart';
+import 'package:reven/global/utility/index.dart';
 import 'package:reven/screens/login_screen/login_style.dart';
 
 class LoginFields {
@@ -13,7 +14,7 @@ class LoginFields {
   }
 
   final heightSpacing = (double data) => SizedBox(
-        height: data,
+        height: appScreenUtil.size(data),
       );
 
   final icon = (icon,Color color) => Icon(
@@ -38,7 +39,7 @@ class LoginFields {
             children: [
               LoginFields().getTextTitle(
                   'Welcome Back', appColor.textPrimaryColor,
-                  letterSpacing: 0.5, fontSize: 20),
+                  letterSpacing: 0.5, fontSize: appScreenUtil.fontSize(20)),
               LoginFields().heightSpacing(5),
               /* Text(
                         'Hello there, sign in to continue!',

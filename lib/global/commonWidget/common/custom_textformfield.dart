@@ -29,6 +29,8 @@ class CustomTextFormField extends StatelessWidget {
   final FormFieldSetter<String>? onSaved;
   final double? borderRadis;
   final FocusNode? focusNode;
+  final OutlineInputBorder? outlineInputBorder;
+  final OutlineInputBorder? focusBorder;
 
   const CustomTextFormField({
     Key? key,
@@ -54,7 +56,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.onFieldSubmitted,
     this.onChanged,
-    this.showBoarder = true, this.onSaved, this.borderRadis, this.focusNode,
+    this.showBoarder = true, this.onSaved, this.borderRadis, this.focusNode, this.outlineInputBorder, this.focusBorder,
   }) : super(key: key);
 
   @override
@@ -63,19 +65,8 @@ class CustomTextFormField extends StatelessWidget {
       focusNode: focusNode,
       controller: controller,
       decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular((borderRadis != null) ? borderRadis! : 18),
-          borderSide: BorderSide(
-            color: appColor.gray,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular((borderRadis != null) ? borderRadis! : 18),
-          borderSide: const BorderSide(
-            color: Color(0xFFB8B8B8),
-            width: 1.0,
-          ),
-        ),
+        focusedBorder: focusBorder,
+        enabledBorder: outlineInputBorder,
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular((borderRadis != null) ? borderRadis! : 18),
           borderSide: BorderSide(

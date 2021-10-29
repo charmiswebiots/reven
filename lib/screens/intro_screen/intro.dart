@@ -14,6 +14,8 @@ class Intro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    //images list
     final imageList = Expanded(
       flex: 6,
       child: PageView.builder(
@@ -37,6 +39,7 @@ class Intro extends StatelessWidget {
       ),
     );
 
+    //dot count list
     final dotList = GetBuilder<IntroController>(
       builder: (controller) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +63,8 @@ class Intro extends StatelessWidget {
       ),
     );
 
-    final dataList = Expanded(
+    //next and back option
+    final dataList = GetBuilder<IntroController>(builder: (controller) =>  Expanded(
       flex: 2,
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -73,12 +77,7 @@ class Intro extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (introCtrl.currentPage != 0)
-                  /*InkWell(
-                    onTap: () {
-                      introCtrl.onBack();
-                    },
-                    child: IntroFields().text('BACK', IntroStyle().backText),
-                  ),*/
+
                   IntroFields().inkWell(
                       onTap: () {
                         introCtrl.onBack();
@@ -109,7 +108,7 @@ class Intro extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),);
 
     return GetBuilder<IntroController>(
       builder: (_) => Scaffold(

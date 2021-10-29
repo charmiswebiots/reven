@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:reven/controllers/login_controller.dart';
+import 'package:reven/fontTitle.dart';
 import 'package:reven/global/commonWidget/common/custom_button.dart';
 import 'package:reven/global/commonWidget/common/custom_textformfield.dart';
 import 'package:reven/global/commonWidget/loginTab.dart';
@@ -43,56 +44,71 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       FocusScope.of(context).requestFocus(nextFocus);
     }
 
+    //tab option
     final loginTab = LoginTab(
       tabController: _tabController,
     );
 
+    //email textformfield
     final getemailTextField = CustomTextFormField(
       focusNode: loginCtrl.emailFocus,
       padding: 20,
       borderRadis: 60,
       controller: loginCtrl.txtemail,
-      hintText: 'Ex : abc@gmail.com',
+      onFieldSubmitted: (value) {
+        _fieldFocusChange(context, loginCtrl.emailFocus, loginCtrl.passwordFocus);
+      },
+      hintText: Font().emailHint,
       keyboardType: TextInputType.emailAddress,
       validator: (value) => LoginValidation().checkEmailIDValidation(value),
       prefixIcon: LoginFields().icon(Icons.email, Colors.black54),
     );
 
-    final getPasswordFIeld = GetBuilder<LoginController>(builder :(controller) => CustomTextFormField(
-      padding: 20,
-      borderRadis: 60,
-      controller: loginCtrl.txtpassword,
-      keyboardType: TextInputType.visiblePassword,
-      hint: 'Enter your Password',
-      obscureText: loginCtrl.obscuredText,
-      prefixIcon: LoginFields().icon(Icons.vpn_key, Colors.black54),
-      suffixIcon: InkWell(
-          onTap: () => loginCtrl.toggle(),
-          child: loginCtrl.obscuredText
-              ? LoginFields().icon(Icons.visibility_off, Colors.black54)
-              : LoginFields().icon(Icons.visibility, Colors.black54)),
-      validator: (value) {
-        LoginValidation().checkPasswordValidation(value);
-      },
-    ),);
+    //password textformfield
+    final getPasswordFIeld = GetBuilder<LoginController>(
+      builder: (controller) => CustomTextFormField(
+        padding: 20,
+        borderRadis: 60,
+        controller: loginCtrl.txtpassword,
+        keyboardType: TextInputType.visiblePassword,
+        hintText: Font().passwordHint,
+        obscureText: loginCtrl.obscuredText,
+        prefixIcon: LoginFields().icon(Icons.vpn_key, Colors.black54),
+        suffixIcon: InkWell(
+            onTap: () => loginCtrl.toggle(),
+            child: loginCtrl.obscuredText
+                ? LoginFields().icon(Icons.visibility_off, Colors.black54)
+                : LoginFields().icon(Icons.visibility, Colors.black54)),
+        validator: (value) => LoginValidation().checkPasswordValidation(value),
+      ),
+    );
 
-    final getPhoneField = GetBuilder<LoginController>(builder: (controller) => CustomTextFormField(
-      padding: 20,
-      borderRadis: 60,
-      controller: loginCtrl.txtPhoneno,
-      hintText: 'Ex : 9316140133',
-      keyboardType: TextInputType.phone,
-      maxLength: 10,
-      validator: (value) => LoginValidation().checkPhoneValidation(value),
-      onChanged: (value) => loginCtrl.onChange(value),
-      suffixIcon: loginCtrl.isValidate
-          ? LoginFields().icon(Icons.check_circle, Colors.green)
-          : LoginFields().icon(Icons.cancel, Colors.red),
-      prefixIcon: LoginFields().icon(Icons.phone_android, Colors.grey),
-    ),);
+    //mobile textformfield
+    final getPhoneField = GetBuilder<LoginController>(
+      builder: (controller) => CustomTextFormField(
+        padding: 20,
+        borderRadis: 60,
+        controller: loginCtrl.txtPhoneno,
+        hintText: Font().mobileHint,
+        keyboardType: TextInputType.phone,
+        focusNode:  loginCtrl.mobileFocus,
+        onFieldSubmitted: (value) {
+          _fieldFocusChange(context, loginCtrl.mobileFocus, loginCtrl.passwordFocus);
+        },
+        maxLength: 10,
+        validator: (value) => LoginValidation().checkPhoneValidation(value),
+        onChanged: (value) => loginCtrl.onChange(value),
+        suffixIcon: loginCtrl.isValidate
+            ? LoginFields().icon(Icons.check_circle, Colors.green)
+            : LoginFields().icon(Icons.cancel, Colors.red),
+        prefixIcon: LoginFields().icon(Icons.phone_android, Colors.grey),
+      ),
+    );
 
+
+    //tabbarview option
     final tabBarView = SizedBox(
-      height: MediaQuery.of(context).size.height * 30 / 100,
+      height: MediaQuery.of(context).size.height * appScreenUtil.size(35) / 100,
       child: TabBarView(
         controller: _tabController,
         children: [
@@ -103,11 +119,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LoginFields().heightSpacing(20),
-                Text('Username or email'),
+                Text(Font().usernameoremail),
                 LoginFields().heightSpacing(10),
                 getemailTextField,
                 LoginFields().heightSpacing(20),
-                Text('Password'),
+                Text(Font().password),
                 LoginFields().heightSpacing(10),
                 getPasswordFIeld
               ],
@@ -120,11 +136,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LoginFields().heightSpacing(20),
-                Text('Phone'),
+                Text(Font().phone),
                 LoginFields().heightSpacing(10),
                 getPhoneField,
                 LoginFields().heightSpacing(20),
-                Text('Password'),
+                Text(Font().password),
                 LoginFields().heightSpacing(10),
                 getPasswordFIeld
               ],
@@ -134,6 +150,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       ),
     );
 
+    //forgot password
     final forgotPassword = Align(
       alignment: Alignment.centerRight,
       child: InkWell(
@@ -141,20 +158,24 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           Get.toNamed(routeName.forgotPassword);
         },
         child: Container(
-          child: Text('Forgot Password?',
+          child: Text(Font().forgotPassword,
               style: LoginStyle().forgotpasswordTextStyle),
         ),
       ),
     );
 
+
+    //login button
     final loginButton = CustomButton(
-      title: 'Sign in',
+      title: Font().signIn,
       height: 50,
       color: Color(0xFF88A6A8),
       radius: 50,
       style: LoginStyle().btnTextstyle,
       onTap: () {
-        if (loginCtrl.txtemail.text != "" && loginCtrl.txtpassword.text != "") {
+        if (_formKey.currentState!.validate()) if (loginCtrl.txtemail.text !=
+                "" &&
+            loginCtrl.txtpassword.text != "") {
           loginCtrl.login();
         } else {
           helper.alertMessage('Please Enter Email and Password');
@@ -162,15 +183,22 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       },
     );
 
+    //not register
     final notRegister = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Not registered yet? ',
+          Font().notRegisterYet,
           style: appCss.h5,
         ),
-        Text(
-          'Create An Account',
-          style: LoginStyle().notRegisterStyle,
+        InkWell(
+          onTap: (){
+            Get.toNamed(routeName.signup);
+          },
+          child: Text(
+            Font().signUp,
+            style: LoginStyle().notRegisterStyle,
+          ),
         ),
       ],
     );
