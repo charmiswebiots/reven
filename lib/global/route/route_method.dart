@@ -8,7 +8,7 @@ import 'package:reven/screens/login_screen/login.dart';
 import 'package:reven/screens/no_internet.dart';
 import 'package:reven/screens/otp_screen/otp_screen.dart';
 import 'package:reven/screens/sign_up_screen/signup.dart';
-import 'package:reven/screens/verify_by_email_rr_mobile_screen/verify_By_Email_Or_Mobile.dart';
+import 'package:reven/screens/verify_by_email_rr_mobile_screen/verify_By_Code.dart';
 
 //app file
 import 'route_name.dart';

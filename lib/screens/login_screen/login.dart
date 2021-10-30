@@ -44,36 +44,35 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       FocusScope.of(context).requestFocus(nextFocus);
     }
 
-    //tab option
-    final loginTab = LoginTab(
-      tabController: _tabController,
-    );
-
     //email textformfield
-    final getemailTextField = CustomTextFormField(
-      focusNode: loginCtrl.emailFocus,
-      padding: 20,
-      borderRadis: 60,
-      controller: loginCtrl.txtemail,
-      onFieldSubmitted: (value) {
-        _fieldFocusChange(context, loginCtrl.emailFocus, loginCtrl.passwordFocus);
-      },
-      hintText: Font().emailHint,
-      keyboardType: TextInputType.emailAddress,
-      validator: (value) => LoginValidation().checkEmailIDValidation(value),
-      prefixIcon: LoginFields().icon(Icons.email, Colors.black54),
+    final getemailTextField = GetBuilder<LoginController>(
+      builder: (controller) => CustomTextFormField(
+        focusNode: loginCtrl.emailFocus,
+        padding: 10,
+        borderRadis: 60,
+        controller: loginCtrl.txtemail,
+        onFieldSubmitted: (value) {
+          _fieldFocusChange(
+              context, loginCtrl.emailFocus, loginCtrl.passwordFocus);
+        },
+        hintText: Font().emailHint,
+        labelText: Font().emailorPhonelabel,
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) => LoginValidation().checkEmailIDValidation(value),
+        suffixIcon: LoginFields().icon(Icons.email, Colors.black54),
+      ),
     );
 
     //password textformfield
     final getPasswordFIeld = GetBuilder<LoginController>(
       builder: (controller) => CustomTextFormField(
-        padding: 20,
+        padding: 10,
         borderRadis: 60,
         controller: loginCtrl.txtpassword,
         keyboardType: TextInputType.visiblePassword,
         hintText: Font().passwordHint,
         obscureText: loginCtrl.obscuredText,
-        prefixIcon: LoginFields().icon(Icons.vpn_key, Colors.black54),
+        labelText: Font().passwordLable,
         suffixIcon: InkWell(
             onTap: () => loginCtrl.toggle(),
             child: loginCtrl.obscuredText
@@ -83,72 +82,12 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       ),
     );
 
-    //mobile textformfield
-    final getPhoneField = GetBuilder<LoginController>(
-      builder: (controller) => CustomTextFormField(
-        padding: 20,
-        borderRadis: 60,
-        controller: loginCtrl.txtPhoneno,
-        hintText: Font().mobileHint,
-        keyboardType: TextInputType.phone,
-        focusNode:  loginCtrl.mobileFocus,
-        onFieldSubmitted: (value) {
-          _fieldFocusChange(context, loginCtrl.mobileFocus, loginCtrl.passwordFocus);
-        },
-        maxLength: 10,
-        validator: (value) => LoginValidation().checkPhoneValidation(value),
-        onChanged: (value) => loginCtrl.onChange(value),
-        suffixIcon: loginCtrl.isValidate
-            ? LoginFields().icon(Icons.check_circle, Colors.green)
-            : LoginFields().icon(Icons.cancel, Colors.red),
-        prefixIcon: LoginFields().icon(Icons.phone_android, Colors.grey),
-      ),
-    );
+    final googleLoginLayout = LoginFields().socialLayout(iconAssets.googlelogo);
 
+    final facebookLoginLayout =
+        LoginFields().socialLayout(iconAssets.facebooklogo);
 
-    //tabbarview option
-    final tabBarView = SizedBox(
-      height: MediaQuery.of(context).size.height * appScreenUtil.size(35) / 100,
-      child: TabBarView(
-        controller: _tabController,
-        children: [
-          // first tab bar view widget
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                LoginFields().heightSpacing(20),
-                Text(Font().usernameoremail),
-                LoginFields().heightSpacing(10),
-                getemailTextField,
-                LoginFields().heightSpacing(20),
-                Text(Font().password),
-                LoginFields().heightSpacing(10),
-                getPasswordFIeld
-              ],
-            ),
-          ),
-          // second tab bar view widget
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                LoginFields().heightSpacing(20),
-                Text(Font().phone),
-                LoginFields().heightSpacing(10),
-                getPhoneField,
-                LoginFields().heightSpacing(20),
-                Text(Font().password),
-                LoginFields().heightSpacing(10),
-                getPasswordFIeld
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    final appleLoginLayout = LoginFields().socialLayout(iconAssets.applelogo);
 
     //forgot password
     final forgotPassword = Align(
@@ -164,13 +103,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       ),
     );
 
-
     //login button
     final loginButton = CustomButton(
       title: Font().signIn,
-      height: 50,
-      color: Color(0xFF88A6A8),
-      radius: 50,
+      height: appScreenUtil.size(45),
+      color: appColor.primaryColor,
       style: LoginStyle().btnTextstyle,
       onTap: () {
         if (_formKey.currentState!.validate()) if (loginCtrl.txtemail.text !=
@@ -183,34 +120,28 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       },
     );
 
-    //not register
-    final notRegister = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          Font().notRegisterYet,
-          style: appCss.h5,
-        ),
-        InkWell(
-          onTap: (){
-            Get.toNamed(routeName.signup);
-          },
-          child: Text(
-            Font().signUp,
-            style: LoginStyle().notRegisterStyle,
-          ),
-        ),
-      ],
-    );
-
     return GetBuilder<LoginController>(
       builder: (_) => WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            elevation: 0,
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
-              child: LoginFields().body(context, _formKey, loginTab, tabBarView,
-                  forgotPassword, loginButton, notRegister),
+              child: LoginFields().body(
+                context,
+                _formKey,
+                getemailTextField,
+                getPasswordFIeld,
+                forgotPassword,
+                loginButton,
+                googleLoginLayout,
+                facebookLoginLayout,
+                appleLoginLayout,
+              ),
             ),
           ),
         ),

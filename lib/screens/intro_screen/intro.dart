@@ -73,25 +73,28 @@ class Intro extends StatelessWidget {
           children: <Widget>[
             Spacer(),
             IntroFields().heightSpacing(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (introCtrl.currentPage != 0)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (introCtrl.currentPage != 0)
 
+                    IntroFields().inkWell(
+                        onTap: () {
+                          introCtrl.onBack();
+                        },
+                        style: IntroStyle().backText,
+                        text: 'BACK'),
+                  dotList,
                   IntroFields().inkWell(
                       onTap: () {
-                        introCtrl.onBack();
+                        introCtrl.onNext();
                       },
-                      style: IntroStyle().backText,
-                      text: 'BACK'),
-                dotList,
-                IntroFields().inkWell(
-                    onTap: () {
-                      introCtrl.onNext();
-                    },
-                    style: IntroStyle().nextText,
-                    text: 'NEXT'),
-              ],
+                      style: IntroStyle().nextText,
+                      text: 'NEXT'),
+                ],
+              ),
             ),
             Spacer(flex: 2),
             CustomButton(

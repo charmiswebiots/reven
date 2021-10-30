@@ -60,6 +60,8 @@ class AppCss {
 
   TextStyle h5 = textSemiBold(12);
 
+  TextStyle h6 = textRegular(14);
+
   TextStyle bodyStyle1 = textRegular(20);
 
   TextStyle bodyStyle2 = textRegular(18);

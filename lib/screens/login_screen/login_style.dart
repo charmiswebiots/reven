@@ -3,23 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:reven/global/packages/config_package.dart';
 
 class LoginStyle {
-  // Header Title 1
-  final titleText1 = TextStyle(
-    fontSize: 22,
-    color: Colors.white,
-    fontWeight: FontWeight.w600,
-    fontFamily: GoogleFonts.poppins().fontFamily,
-  );
-
-// Header Title 2
-  final titleText2 = TextStyle(
-    fontSize: 13,
-    color: Colors.white,
-  );
-
-// Heading Text
-  final headText = TextStyle(
-      fontSize: 18, fontWeight: FontWeight.w800, color: appColor.primaryColor);
 
 // Field Heading Text
   final fieldHeadText =
@@ -33,23 +16,27 @@ class LoginStyle {
 
 // Button Text Style
   final btnTextstyle =
-      TextStyle(color: Colors.white, letterSpacing: 0.5, fontSize: appScreenUtil.fontSize(16));
+      TextStyle(color: Colors.white, letterSpacing: 0.5, fontSize: appScreenUtil.fontSize(14),fontFamily: GoogleFonts.poppins().fontFamily,);
 
   final edgeInsets = EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0);
 
   //forgot password text style
   final forgotpasswordTextStyle =
-      TextStyle(color: Color(0xFF265DCD), fontWeight: FontWeight.w500);
+      TextStyle(color: Color(0xFF265DCD), fontWeight: FontWeight.w500,fontFamily: GoogleFonts.poppins().fontFamily,);
 
   //not register Style
   final notRegisterStyle =
-      TextStyle(color: appColor.primaryDarkColor, fontSize: appScreenUtil.fontSize(14));
+      TextStyle(color: appColor.primaryColor, fontSize: appScreenUtil.fontSize(14),fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily,);
 
-  titleTextStyle(color, fontWeight, letterSpacing, fontSize) {
+  //not register Style
+  final notSignupStyle =
+      TextStyle(color: appColor.primaryColor, fontSize: appScreenUtil.fontSize(14),fontWeight: FontWeight.w700,fontFamily: GoogleFonts.poppins().fontFamily,);
+
+  titleTextStyle(color, fontWeight, letterSpacing,double fontSize) {
     return TextStyle(
         color: color,
         fontWeight: fontWeight,
         letterSpacing: letterSpacing,
-        fontSize: fontSize);
+        fontSize: fontSize,fontFamily: GoogleFonts.roboto(fontWeight: FontWeight.bold).fontFamily,);
   }
 }

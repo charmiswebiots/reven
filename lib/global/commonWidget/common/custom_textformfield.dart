@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:reven/global/packages/config_package.dart';
 import 'package:reven/global/theme/index.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -82,7 +83,7 @@ class CustomTextFormField extends StatelessWidget {
             : null,
         suffixIcon: suffixIcon != null
             ? Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10,),
           child: suffixIcon,
         )
             : null,
@@ -91,6 +92,7 @@ class CustomTextFormField extends StatelessWidget {
         contentPadding: EdgeInsets.all(padding),
         hintText: hintText,
         labelText: labelText,
+        labelStyle: TextStyle(fontSize: appScreenUtil.fontSize(14),color: appColor.primaryColor),
         counterText: showCounter ? null : '',
       ),
       onSaved: onSaved,
