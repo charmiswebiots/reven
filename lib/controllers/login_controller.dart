@@ -35,6 +35,7 @@ class LoginController extends GetxController {
   }
 
   login() async {
+    await helper.writeStorage(session.id, '1');
     Get.toNamed(routeName.otpScreen);
   }
 

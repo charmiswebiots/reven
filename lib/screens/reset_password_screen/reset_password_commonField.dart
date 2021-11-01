@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:reven/fontTitle.dart';
 import 'package:reven/global/commonWidget/common/custom_button.dart';
 import 'package:reven/global/packages/config_package.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_style.dart';
-import 'package:reven/screens/forgot_password_screen/forgot_password_style.dart';
-import 'package:reven/screens/intro_screen/intro_style.dart';
-import 'package:reven/screens/login_screen/login_style.dart';
+import 'package:reven/screens/reset_password_screen/reset_password_style.dart';
 
-class ConfirmPasswordFields {
+class ResetPasswordFields {
   //get title
   getTextTitle(Color? color,
       {double? letterSpacing, double? fontSize, FontWeight? fontWeight}) {
     return Text(
       Font().confirmPasswordTitle,
-      style: ConfirmPasswordStyle()
+      style: ResetPasswordStyle()
           .titleTextStyle(color, fontWeight, letterSpacing, fontSize),
     );
   }
@@ -85,8 +82,8 @@ class ConfirmPasswordFields {
           Stack(
             alignment: Alignment.center,
             children: [
-              ConfirmPasswordFields().firstClipOval(context),
-              ConfirmPasswordFields().secondCilpOval(context),
+              ResetPasswordFields().firstClipOval(context),
+              ResetPasswordFields().secondCilpOval(context),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(
@@ -107,27 +104,27 @@ class ConfirmPasswordFields {
           onTap: onTap,
           title: Font().send,
           height: appScreenUtil.size(45),
-          style: ConfirmPasswordStyle().sendButtonStyle,
+          style: ResetPasswordStyle().sendButtonStyle,
         ),
       );
 
   //resend code
   final resendCode = ({GestureTapCallback? onTap, style}) => InkWell(
         onTap: onTap,
-        child: ConfirmPasswordFields().text(Font().resendCode, style),
+        child: ResetPasswordFields().text(Font().resendCode, style),
       );
 
   //get title
   final title = Text(
     Font().confirmPasswordAppBarTitle,
-    style: ConfirmPasswordStyle().titleTextStyle(appColor.primaryColor, FontWeight.w900, 0.8, 30),
+    style: ResetPasswordStyle().titleTextStyle(appColor.primaryColor, FontWeight.w900, 0.8, 30),
   );
 
 
   //get descriptionText
   final descriptionText = Text(
     Font().confirmPasswordTitle,
-    style: ConfirmPasswordStyle()
+    style: ResetPasswordStyle()
         .descriptionTextStyle(appColor.primaryColor, FontWeight.w400, 0.8, 14),
   );
 
@@ -136,16 +133,16 @@ class ConfirmPasswordFields {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ConfirmPasswordFields().title,
-          ConfirmPasswordFields().heightSpacing(10),
-          ConfirmPasswordFields().descriptionText,
-          ConfirmPasswordFields().heightSpacing(30),
+          ResetPasswordFields().title,
+          ResetPasswordFields().heightSpacing(10),
+          ResetPasswordFields().descriptionText,
+          ResetPasswordFields().heightSpacing(30),
           passwordTextBox,
-          ConfirmPasswordFields().heightSpacing(20),
+          ResetPasswordFields().heightSpacing(20),
           confirmpasswordTextBox,
-          ConfirmPasswordFields().heightSpacing(30),
+          ResetPasswordFields().heightSpacing(30),
           customButton,
-          ConfirmPasswordFields().heightSpacing(50),
+          ResetPasswordFields().heightSpacing(50),
         ],
       );
 }

@@ -18,7 +18,7 @@ class Font {
   final String confirmPasswordAppBarTitle = 'Create new password';
   final String confirmPasswordLable = 'CONFIRM PASSWORD';
   final String confirmPasswordTitle = 'Your New Password Must Be Different \nfrom Previously Used Password';
-  final String send = 'Send';
+  final String send = 'Reset';
 
   //Otp
   final String otpAppBarTitle = 'Enter Verification Code';

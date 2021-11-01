@@ -18,8 +18,8 @@ class Signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _fieldFocusChange(
-        BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    _fieldFocusChange(BuildContext context, FocusNode currentFocus,
+        FocusNode nextFocus) {
       currentFocus.unfocus();
       FocusScope.of(context).requestFocus(nextFocus);
     }
@@ -69,43 +69,48 @@ class Signup extends StatelessWidget {
 
     //password textformfield
     final passwordFormField = GetBuilder<SignupController>(
-      builder: (controller) => CustomTextFormField(
-        hintText: Font().passwordHint,
-        labelText: Font().passwordLable,
-        controller: signupCtrl.txtPassword,
-        keyboardType: TextInputType.visiblePassword,
-        focusNode: signupCtrl.passwordFocus,
-        onFieldSubmitted: (value) {
-          _fieldFocusChange(context, signupCtrl.passwordFocus,
-              signupCtrl.confirmpasswordFocus);
-        },
-        obscureText: signupCtrl.obscuredText,
-        validator: (value) => SignupValidation().checkPasswordValidation(value),
-        suffixIcon: InkWell(
-          onTap: () => signupCtrl.toggle(),
-          child: signupCtrl.obscuredText
-              ? Icon(Icons.visibility_off, color: Colors.black54)
-              : Icon(Icons.visibility, color: Colors.black54),
-        ),
-      ),
+      builder: (controller) =>
+          CustomTextFormField(
+            hintText: Font().passwordHint,
+            labelText: Font().passwordLable,
+            controller: signupCtrl.txtPassword,
+            keyboardType: TextInputType.visiblePassword,
+            focusNode: signupCtrl.passwordFocus,
+            onFieldSubmitted: (value) {
+              _fieldFocusChange(context, signupCtrl.passwordFocus,
+                  signupCtrl.confirmpasswordFocus);
+            },
+            obscureText: signupCtrl.obscuredText,
+            validator: (value) =>
+                SignupValidation().checkPasswordValidation(value),
+            suffixIcon: InkWell(
+              onTap: () => signupCtrl.toggle(),
+              child: signupCtrl.obscuredText
+                  ? Icon(Icons.visibility_off, color: Colors.black54)
+                  : Icon(Icons.visibility, color: Colors.black54),
+            ),
+          ),
     );
 
     //confirmpassword textformfield
     final confirmPasswordFormField = GetBuilder<SignupController>(
-      builder: (controller) => CustomTextFormField(
-        hintText: 'Min 8 characters',
-        labelText: Font().confirmPasswordLable,
-        controller: signupCtrl.txtConfirmPassword,
-        obscureText: signupCtrl.confirmOscuredText,
-        suffixIcon: InkWell(
-          onTap: () => signupCtrl.confirmPasswordToggle(),
-          child: signupCtrl.confirmOscuredText
-              ? Icon(Icons.visibility_off, color: Colors.black54)
-              : Icon(Icons.visibility, color: Colors.black54),
-        ),
-        validator: (value) => SignupValidation()
-            .checkConfirmPasswordValidation(value, signupCtrl.txtPassword.text),
-      ),
+      builder: (controller) =>
+          CustomTextFormField(
+            hintText: Font().passwordHint,
+            labelText: Font().confirmPasswordLable,
+            controller: signupCtrl.txtConfirmPassword,
+            obscureText: signupCtrl.confirmOscuredText,
+            suffixIcon: InkWell(
+              onTap: () => signupCtrl.confirmPasswordToggle(),
+              child: signupCtrl.confirmOscuredText
+                  ? Icon(Icons.visibility_off, color: Colors.black54)
+                  : Icon(Icons.visibility, color: Colors.black54),
+            ),
+            validator: (value) =>
+                SignupValidation()
+                    .checkConfirmPasswordValidation(
+                    value, signupCtrl.txtPassword.text),
+          ),
     );
 
     //signupbutton
@@ -120,59 +125,67 @@ class Signup extends StatelessWidget {
     );
 
     final googleLoginLayout =
-        SignupFields().socialLayout(iconAssets.googlelogo);
+    SignupFields().socialLayout(iconAssets.googlelogo);
 
     final facebookLoginLayout =
-        SignupFields().socialLayout(iconAssets.facebooklogo);
+    SignupFields().socialLayout(iconAssets.facebooklogo);
 
     final appleLoginLayout = SignupFields().socialLayout(iconAssets.applelogo);
 
     return GetBuilder<SignupController>(
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: InkWell(
-              onTap: () => Get.back(),
-              child:
+      builder: (_) =>
+          Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.white,
+              elevation: 0,
+              leading: InkWell(
+                  onTap: () => Get.back(),
+                  child:
                   SignupFields().icon(Icons.arrow_back, appColor.primaryColor)),
-        ),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Container(
-                child: Form(
-                  key: signupformKey,
+            ),
+            body: Stack(
+              children: [
+                SingleChildScrollView(
                   child: Container(
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.2 / 50),
-                    width: MediaQuery.of(context).size.width,
-                    // height: MediaQuery.of(context).size.height * 500,
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            topLeft: Radius.circular(20))),
-                    child: SignupFields().body(
-                        context,
-                        nameFormField,
-                        phoneFormField,
-                        emailFormField,
-                        passwordFormField,
-                        confirmPasswordFormField,
-                        googleLoginLayout,
-                        facebookLoginLayout,
-                        appleLoginLayout,
-                        signupButton),
+                    child: Form(
+                      key: signupformKey,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            top: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.2 / 50),
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        // height: MediaQuery.of(context).size.height * 500,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 30),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20))),
+                        child: SignupFields().body(
+                            context,
+                            nameFormField,
+                            phoneFormField,
+                            emailFormField,
+                            passwordFormField,
+                            confirmPasswordFormField,
+                            googleLoginLayout,
+                            facebookLoginLayout,
+                            appleLoginLayout,
+                            signupButton),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

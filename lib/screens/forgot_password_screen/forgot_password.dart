@@ -7,11 +7,11 @@ import 'package:reven/global/commonWidget/common/custom_textformfield.dart';
 
 import 'package:reven/global/packages/config_package.dart';
 import 'package:reven/screens/forgot_password_screen/forgot_password_commonFields.dart';
-import 'package:reven/screens/forgot_password_screen/forgot_password_style.dart';
+import 'package:reven/screens/forgot_password_screen/forgot_password_validation.dart';
 
 class ForgotPassword extends StatelessWidget {
   var forgotPasswordCtrl = Get.put(ForgotPasswordController());
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
 
@@ -20,19 +20,18 @@ class ForgotPassword extends StatelessWidget {
       padding: 10,
       borderRadis: 60,
       controller: forgotPasswordCtrl.txtEmail,
-      hintText: 'Ex : abc@gmail.com',
       labelText: Font().emailorPhonelabel,
       keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        forgotPasswordCtrl.emailValidator(value!);
-        forgotPasswordCtrl.update();
-      },
-      prefixIcon: Icon(Icons.email, color: Colors.black54),
+      validator: (value) => ForgotPasswordValidation().checkForEmailOrPhone(value),
+      suffixIcon: Icon(Icons.person, color: Colors.black54),
     ));
 
     //verify button
     final customButton = ForgotPasswordFields().customButton(
-        onTap: () => Get.toNamed(routeName.verifyByEmailOrMobile));
+        onTap: () {
+          if(_formKey.currentState!.validate())
+            Get.toNamed(routeName.verifyByEmailOrMobile);
+        });
 
     return GetBuilder<ForgotPasswordController>(
       builder: (_) => Scaffold(
@@ -46,17 +45,20 @@ class ForgotPassword extends StatelessWidget {
               ontap: () => Get.back()),
         ),
         body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2/ 50),
-            width: MediaQuery.of(context).size.width,
-            // height: MediaQuery.of(context).size.height * 500,
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-            child: ForgotPasswordFields().body(context,
-                emailTextBox, customButton),
+          child: Form(
+            key: _formKey,
+            child: Container(
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2/ 50),
+              width: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height * 500,
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+              child: ForgotPasswordFields().body(context,
+                  emailTextBox, customButton),
+            ),
           ),
         ),
       ),

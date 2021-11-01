@@ -1,13 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:reven/controllers/login_controller.dart';
 import 'package:reven/fontTitle.dart';
 import 'package:reven/global/commonWidget/common/custom_button.dart';
 import 'package:reven/global/commonWidget/common/custom_textformfield.dart';
-import 'package:reven/global/commonWidget/loginTab.dart';
-import 'package:reven/global/commonWidget/tab1.dart';
-import 'package:reven/global/commonWidget/tab2.dart';
 import 'package:reven/global/packages/config_package.dart';
 import 'package:reven/global/theme/index.dart';
 import 'package:reven/screens/login_screen/login_commonFields.dart';
@@ -55,11 +51,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           _fieldFocusChange(
               context, loginCtrl.emailFocus, loginCtrl.passwordFocus);
         },
-        hintText: Font().emailHint,
+        //hintText: Font().emailHint,
         labelText: Font().emailorPhonelabel,
-        keyboardType: TextInputType.emailAddress,
-        validator: (value) => LoginValidation().checkEmailIDValidation(value),
-        suffixIcon: LoginFields().icon(Icons.email, Colors.black54),
+        validator: (value) => LoginValidation().checkForEmailOrPhone(value),
+        suffixIcon: LoginFields().icon(Icons.person, Colors.black54),
       ),
     );
 

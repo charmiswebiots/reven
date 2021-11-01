@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reven/screens/dashboard.dart';
 
 //file
 import 'index.dart';
@@ -60,6 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return HomeLayout();
+    return Dashboard();
   }
 }

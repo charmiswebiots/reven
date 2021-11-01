@@ -29,9 +29,14 @@ class SplashController extends GetxController {
     if (isInternet) {
       String authToken = helper.getStorage(session.authToken);
       var intro = helper.getStorage(session.intro).toString();
+      var id = helper.getStorage(session.id).toString();
       print("authToken : $intro");
       if (intro == "true") {
-        Get.toNamed(routeName.login);
+        if(id != null && id != ""){
+          Get.toNamed(routeName.home);
+        }else {
+          Get.toNamed(routeName.login);
+        }
       } else {
         Get.toNamed(routeName.intro);
       }

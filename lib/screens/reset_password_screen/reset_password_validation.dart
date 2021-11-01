@@ -1,6 +1,6 @@
 /*import 'package:trade_result/utils/font.dart';*/
 
-class ConfirmPasswordValidation {
+class ResetPasswordValidation {
 
 
 // Check Password Validation

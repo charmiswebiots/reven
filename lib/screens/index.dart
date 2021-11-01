@@ -1,49 +1,29 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 //app file
 import 'package:reven/controllers/home_controller.dart';
 import 'package:get/get.dart';
+import 'package:reven/global/packages/config_package.dart';
+import 'package:reven/screens/drawer.dart';
 
 class HomeLayout extends StatelessWidget {
   var homeCtrl = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
-      body: GetBuilder<HomeController>(
-        builder: (_) => Center(
-          child: homeCtrl.widgetOptions.elementAt(homeCtrl.selectedIndex),
-        ),
-      ),
-      bottomNavigationBar: GetBuilder<HomeController>(
-        builder: (_) => BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.red,
+    return GetBuilder<HomeController>(
+      builder: (_) => WillPopScope(
+        onWillPop: () async {
+          // homeCtrl.appClose(context);
+          return false;
+        },
+        child: Scaffold(
+          body: Center(
+            child: Container(
+              child: Text('Home'),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Business',
-              backgroundColor: Colors.green,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
-              backgroundColor: Colors.purple,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-              backgroundColor: Colors.pink,
-            ),
-          ],
-          currentIndex: homeCtrl.selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: homeCtrl.onItemTapped,
+          ),
         ),
       ),
     );

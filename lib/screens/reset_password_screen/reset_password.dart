@@ -1,28 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:reven/controllers/confirmPassword_controller.dart';
-import 'package:reven/controllers/verification_password_controller.dart';
 import 'package:reven/fontTitle.dart';
-import 'package:reven/global/commonWidget/common/custom_button.dart';
 import 'package:reven/global/commonWidget/common/custom_textformfield.dart';
-import 'package:reven/global/commonWidget/intro_content.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_commonField.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_commonField.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_commonField.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_commonField.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_commonField.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_commonField.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_style.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_style.dart';
-import 'package:reven/screens/confirm_password_screen/confirm_password_validation.dart';
-import 'package:reven/screens/verify_by_email_rr_mobile_screen/verify_by_code_style.dart';
-import 'package:reven/screens/verify_by_email_rr_mobile_screen/verify_by_code_commonFields.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:reven/global/packages/config_package.dart';
+import 'package:reven/screens/reset_password_screen/reset_password_commonField.dart';
+import 'package:reven/screens/reset_password_screen/reset_password_validation.dart';
 
-class ConfirmPassword extends StatelessWidget {
+class RestPassword extends StatelessWidget {
   var confirmPasswordCtrl = Get.put(ConfirmPasswordContoller());
   var confirmKey = GlobalKey<FormState>();
 
@@ -40,13 +24,12 @@ class ConfirmPassword extends StatelessWidget {
         keyboardType: TextInputType.visiblePassword,
         obscureText: confirmPasswordCtrl.obscuredText,
         validator: (value) =>
-            ConfirmPasswordValidation().checkPasswordValidation(value),
-        prefixIcon: ConfirmPasswordFields().icon(Icons.vpn_key, Colors.grey),
+            ResetPasswordValidation().checkPasswordValidation(value),
         suffixIcon: InkWell(
           onTap: () => confirmPasswordCtrl.toggle(),
           child: confirmPasswordCtrl.obscuredText
-              ? ConfirmPasswordFields().icon(Icons.visibility_off, Colors.grey)
-              : ConfirmPasswordFields().icon(Icons.visibility, Colors.grey),
+              ? ResetPasswordFields().icon(Icons.visibility_off, Colors.grey)
+              : ResetPasswordFields().icon(Icons.visibility, Colors.grey),
         ),
       ),
     );
@@ -62,21 +45,20 @@ class ConfirmPassword extends StatelessWidget {
         controller: confirmPasswordCtrl.txtConfirmPassword,
         keyboardType: TextInputType.visiblePassword,
         obscureText: confirmPasswordCtrl.confirmOscuredText,
-        validator: (value) => ConfirmPasswordValidation()
+        validator: (value) => ResetPasswordValidation()
             .checkConfirmPasswordValidation(
                 value, confirmPasswordCtrl.txtPassword.text),
-        prefixIcon: ConfirmPasswordFields().icon(Icons.vpn_key, Colors.grey),
         suffixIcon: InkWell(
           onTap: () => confirmPasswordCtrl.confirmPasswordToggle(),
           child: confirmPasswordCtrl.confirmOscuredText
-              ? ConfirmPasswordFields().icon(Icons.visibility_off, Colors.grey)
-              : ConfirmPasswordFields().icon(Icons.visibility, Colors.grey),
+              ? ResetPasswordFields().icon(Icons.visibility_off, Colors.grey)
+              : ResetPasswordFields().icon(Icons.visibility, Colors.grey),
         ),
       ),
     );
 
     //sendbutton
-    final customButton = ConfirmPasswordFields().customButton(onTap: () {
+    final customButton = ResetPasswordFields().customButton(onTap: () {
       if (confirmKey.currentState!.validate()) Get.offAllNamed(routeName.login);
     });
 
@@ -87,7 +69,7 @@ class ConfirmPassword extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
           automaticallyImplyLeading: false,
-          leading: ConfirmPasswordFields().icon(
+          leading: ResetPasswordFields().icon(
               Icons.arrow_back, appColor.primaryColor,
               ontap: () => Get.back()),
         ),
@@ -105,7 +87,7 @@ class ConfirmPassword extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20))),
-              child: ConfirmPasswordFields().body(context, passwordTextBox,
+              child: ResetPasswordFields().body(context, passwordTextBox,
                   customButton, confirmpasswordTextBox),
             ),
           ),

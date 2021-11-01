@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reven/global/packages/config_package.dart';
 
-class ConfirmPasswordStyle {
+class ResetPasswordStyle {
 
   //send button text style
   final sendButtonStyle =TextStyle(

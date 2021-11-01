@@ -9,7 +9,7 @@ class VerifyByCodeStyle {
   TextStyle(color: Color(0xFF265DCD), fontWeight: FontWeight.w500);
 
   final resendCodeStyle = TextStyle(
-      color: appColor.primaryDarkColor, fontSize: appScreenUtil.fontSize(14),decoration: TextDecoration.underline,
+      color: appColor.primaryDarkColor, fontSize: appScreenUtil.fontSize(14),
       fontFamily: GoogleFonts.poppins().fontFamily,);
 
   final sendButtonStyle =TextStyle(

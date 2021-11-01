@@ -45,10 +45,8 @@ class SignupFields {
   );
 
   final socialLayout = (icon) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-        decoration: BoxDecoration(
-            border: Border.all(color: appColor.inputBorder),
-            borderRadius: BorderRadius.circular(12)),
+        padding: EdgeInsets.symmetric(vertical: 8),
+
         child: Image.asset(
           icon,
           height: 30,
@@ -75,7 +73,7 @@ class SignupFields {
         ),
         InkWell(
           onTap: () {
-            Get.toNamed(routeName.signup);
+           Get.back();
           },
           child: Text(
             Font().signIn,
@@ -115,7 +113,7 @@ class SignupFields {
           signUpButton,
           SignupFields().heightSpacing(30),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               googleLoginLayout,
               facebookLoginLayout,

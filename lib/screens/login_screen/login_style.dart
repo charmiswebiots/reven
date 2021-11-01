@@ -22,7 +22,7 @@ class LoginStyle {
 
   //forgot password text style
   final forgotpasswordTextStyle =
-      TextStyle(color: Color(0xFF265DCD), fontWeight: FontWeight.w500,fontFamily: GoogleFonts.poppins().fontFamily,);
+      TextStyle(color: appColor.primaryDarkColor, fontWeight: FontWeight.w500,fontFamily: GoogleFonts.poppins().fontFamily,);
 
   //not register Style
   final notRegisterStyle =

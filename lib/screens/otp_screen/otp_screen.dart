@@ -18,8 +18,10 @@ class OtpScreen extends StatelessWidget {
         .resendCode(onTap: () {}, style: OtpCodeStyle().resendCodeStyle);
 
     //custom button
-    final customButton = OtpFields()
-        .customButton(onTap: () => Get.toNamed(routeName.confirmPassword));
+    final customButton = OtpFields().customButton(onTap: () async{
+      await helper.writeStorage(session.id, '1');
+      Get.toNamed(routeName.home);
+    });
 
     //otp filed
     final otpFiled = GetBuilder<OtpController>(
@@ -59,27 +61,28 @@ class OtpScreen extends StatelessWidget {
     );
 
     return GetBuilder<OtpController>(
-      builder: (_) =>  Scaffold(
+      builder: (_) => Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
           elevation: 0,
-          leading: OtpFields().icon(
-              Icons.arrow_back, appColor.primaryColor,
+          leading: OtpFields().icon(Icons.arrow_back, appColor.primaryColor,
               ontap: () => Get.back()),
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2/ 50),
+            margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.2 / 50),
             width: MediaQuery.of(context).size.width,
             // height: MediaQuery.of(context).size.height * 500,
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-            child: OtpFields()
-                .body(context, otpFiled, resendButton, customButton),
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20))),
+            child:
+                OtpFields().body(context, otpFiled, resendButton, customButton),
           ),
         ),
       ),

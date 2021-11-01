@@ -6,8 +6,7 @@ class OtpCodeStyle {
   //resend code text style
   final resendCodeStyle = TextStyle(
       color: appColor.primaryDarkColor,
-      fontSize: appScreenUtil.fontSize(16),fontFamily: GoogleFonts.poppins().fontFamily,
-      decoration: TextDecoration.underline);
+      fontSize: appScreenUtil.fontSize(16),fontFamily: GoogleFonts.poppins().fontFamily,);
 
   //send button style
   final sendButtonStyle =
